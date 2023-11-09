@@ -1,0 +1,1 @@
+- Merge recommendation and popular into one component
