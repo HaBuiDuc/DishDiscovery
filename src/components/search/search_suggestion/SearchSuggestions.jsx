@@ -23,6 +23,7 @@ const SearchSuggestions = ({ sugesstionList, onItemSelected }) => {
           <SuggestionItem
             itemName={data.title}
             onItemSelected={() => {onItemSelected(data.title)}}
+            key={data.id}
           />
         ))
       }

@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import fetchSearchAC from '../../hook/fetchSearchAC'
 import SearchContainer from '../../components/search/search_container/SearchContainer'
 import SearchSuggestions from '../../components/search/search_suggestion/SearchSuggestions'
@@ -10,12 +10,16 @@ const SearchScreen = ({ navigation }) => {
   const [searchQuery, setQuery] = useState('')
   const [isQuerying, setQuerying] = useState(true)
   const suggestions = fetchSearchAC(searchQuery).data
-  const searchResult = fetchSearch(searchQuery).data.results
+  const searchResult = fetchSearch(searchQuery, isQuerying).data
 
   const onSelectedSuggestion = (title) => {
     setQuerying(false)
     setQuery(title)
   }
+
+  useEffect(() => {
+    setQuerying(true)
+  }, [searchQuery])
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -28,6 +32,7 @@ const SearchScreen = ({ navigation }) => {
       )
     })
   }, [navigation, searchQuery])
+
   return (
     <View style={styles.container}>
       {/* <SearchSuggestions

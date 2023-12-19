@@ -9,7 +9,7 @@ import Popular from "../../components/homepage/popular/Popular"
 import fetchRecommend from "../../hook/fetchRecommend"
 
 export const HomePage = ({navigation}) => {
-    // console.log(fetchRecommend().data);
+    console.log(fetchRecommend().data);
     const foodData = fetchRecommend().data.recipes
     return (
         <View style={styles.container}>

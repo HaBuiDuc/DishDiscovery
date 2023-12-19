@@ -5,11 +5,15 @@ import SearchItem from './SearchItem'
 const SearchResult = ({ searchResult }) => {
     // console.log(searchResult);
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView
+         style={styles.container}
+         showsVerticalScrollIndicator={false}
+        >
             {
                 Object.values(searchResult).map(data => (
                     <SearchItem
                         searchItem={data}
+                        key={data.id}
                     />
                 ))
             }

@@ -8,7 +8,7 @@ const SearchItem = ({searchItem}) => {
             style={styles.foodImage}
             source={{uri: searchItem.image}}
         />
-        <Text style={styles.foodTitle}>{searchItem.title}</Text>
+        <Text numberOfLines={2} style={styles.foodTitle}>{searchItem.title}</Text>
     </View>
   )
 }
@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
     foodTitle: {
         fontSize: 16,
         color: 'black',
-        fontWeight: '800'
+        fontWeight: '600'
     }
 })
