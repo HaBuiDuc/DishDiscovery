@@ -1,10 +1,12 @@
-import { StyleSheet, View } from 'react-native'
+import { NativeAppEventEmitter, StyleSheet, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import fetchSearchAC from '../../hook/fetchSearchAC'
 import SearchContainer from '../../components/search/search_container/SearchContainer'
 import SearchSuggestions from '../../components/search/search_suggestion/SearchSuggestions'
 import fetchSearch from '../../hook/fetchSearch'
 import SearchResult from '../../components/search/search_result/SearchResult'
+import fetchRecipe from '../../hook/fetchRecipe'
+import { Screen } from 'react-native-screens'
 
 const SearchScreen = ({ navigation }) => {
   const [searchQuery, setQuery] = useState('')
@@ -15,6 +17,11 @@ const SearchScreen = ({ navigation }) => {
   const onSelectedSuggestion = (title) => {
     setQuerying(false)
     setQuery(title)
+  }
+
+  const onDetailNavigate = (item) => {
+    // const {data, isLoading} = fetchRecipe(item.id)
+    navigation.navigate('Detail', item.id)    // console.log(data);
   }
 
   useEffect(() => {
@@ -35,11 +42,6 @@ const SearchScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {/* <SearchSuggestions
-        sugesstionList={suggestions}
-        onItemSelected={title => { }}
-      /> */}
-
       {
         (isQuerying)
           ? (
@@ -51,6 +53,7 @@ const SearchScreen = ({ navigation }) => {
           : (
             <SearchResult
               searchResult={searchResult}
+              onResultSelected={onDetailNavigate}
             />
           )
       }

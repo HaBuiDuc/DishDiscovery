@@ -7,10 +7,11 @@ import Recommendation from "../../components/homepage/recommendation/Recommendat
 import { categoriesData } from "../../data/CategoriesData"
 import Popular from "../../components/homepage/popular/Popular"
 import fetchRecommend from "../../hook/fetchRecommend"
+import { getUserFromFirestore } from "../../../firebase/FirebaseService"
 
 export const HomePage = ({navigation}) => {
-    console.log(fetchRecommend().data);
-    const foodData = fetchRecommend().data.recipes
+    const {data, isLoading, refetch} = fetchRecommend()
+    const foodData = data.recipes
     return (
         <View style={styles.container}>
             <ScrollView 
@@ -34,7 +35,7 @@ export const HomePage = ({navigation}) => {
                 <Recommendation
                     foodData={foodData}
                     onDetailToggle={(item) => {
-                        navigation.navigate('Detail', item)
+                        navigation.navigate('Detail', item.id)
                         console.log("pressed");
                     }}
                 />
@@ -42,7 +43,7 @@ export const HomePage = ({navigation}) => {
                 <Popular
                     foodData={foodData}
                     onDetailToggle={(item) => {
-                        navigation.navigate('Detail', item)
+                        navigation.navigate('Detail', item.id)
                         console.log("pressed");
                     }}
                 />

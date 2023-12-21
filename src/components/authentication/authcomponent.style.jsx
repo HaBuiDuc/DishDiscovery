@@ -6,13 +6,12 @@ export const styles = StyleSheet.create({
         paddingVertical: 12,
         alignItems: "center",
         borderRadius: 8,
-        marginVertical:16 
+        marginVertical: 24
     },
     buttonTxt: {
-        fontSize: 16,
-        fontWeight: '400',
+        fontSize: 18,
         color: 'white',
-        fontWeight: '600'
+        fontWeight: '700'
     },
     container: {
         flexDirection: "row",

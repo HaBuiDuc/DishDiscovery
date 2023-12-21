@@ -2,8 +2,8 @@ import { ScrollView, StyleSheet } from 'react-native'
 import React from 'react'
 import GeneralInfo from '../general_info/GeneralInfo'
 import Description from '../description/Description'
-import Ingredient from '../ingredient/Ingredients'
 import Spacer from '../../shared/Spacer'
+import Ingredients from '../ingredient/Ingredients'
 
 const FoodDetail = ({ foodData }) => {
   return (
@@ -15,7 +15,7 @@ const FoodDetail = ({ foodData }) => {
           foodDes={foodData.summary}
         />
         <Spacer height={16}/>
-        <Ingredient
+        <Ingredients
           ingredientList={foodData.extendedIngredients}
         />
     </ScrollView>

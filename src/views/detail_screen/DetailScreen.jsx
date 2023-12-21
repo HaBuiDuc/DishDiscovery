@@ -4,18 +4,32 @@ import TopBar from '../../components/detail/topbar/TopBar'
 import FoodPhoto from '../../components/detail/food_photo/FoodPhoto'
 import FoodDetail from '../../components/detail/food_detail/FoodDetail'
 import Modal from 'react-native-modal';
+import fetchRecipe from '../../hook/fetchRecipe'
+import { addFavoriteDish } from '../../../firebase/FirebaseService'
 
 
 const DetailScreen = ({ route, navigation }) => {
   const popBack = () => {
     navigation.pop()
   }
-  const foodData = route.params
+  const foodDataId = route.params
+  const addToFavorite = () => {
+    const data = {
+      id: foodDataId
+    }
+    addFavoriteDish(data)
+  }
+
+  const {data: foodData, isLoading: foodLoading, refetch: foodRefetch} = fetchRecipe(foodDataId)
+  if (!foodData.extendedIngredients) {
+    return
+  }
   return (
     <View style={styles.container}>
       <View style={styles.topBar}>
         <TopBar
           popBack={popBack}
+          addToFavorite={addToFavorite}
         />
       </View>
       <FoodPhoto
@@ -28,7 +42,6 @@ const DetailScreen = ({ route, navigation }) => {
       <FoodDetail
         foodData={foodData}
       />
-
     </View>
   )
 }
