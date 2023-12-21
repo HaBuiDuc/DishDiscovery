@@ -1,20 +1,12 @@
 import { Image, StyleSheet, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import ProfileField from '../../components/account/ProfileField'
-import { getUserFromFirestore } from '../../../firebase/FirebaseService'
 import HorizontalLine from '../../components/account/HorizontalLine'
 import Spacer from '../../components/shared/Spacer'
+import { UserProfileContext } from '../../contexts/UserProfileContext'
 
 const UserProfileScreen = ({ navigation }) => {
-  const [userProfile, setUserProfile] = useState([])
-
-  const onGetUserSuccess = (data) => {
-    setUserProfile(data)
-  }
-
-  useEffect(() => {
-    getUserFromFirestore(onGetUserSuccess)
-  }, [])
+  const {userProfile} = useContext(UserProfileContext)
 
   if (userProfile == null) {
     return

@@ -12,11 +12,12 @@ const SearchScreen = ({ navigation }) => {
   const [searchQuery, setQuery] = useState('')
   const [isQuerying, setQuerying] = useState(true)
   const suggestions = fetchSearchAC(searchQuery).data
-  const searchResult = fetchSearch(searchQuery, isQuerying).data
+  const {data: searchResult, isLoading: searchLoading, refetch: searchRefetch} = fetchSearch(searchQuery, isQuerying)
 
   const onSelectedSuggestion = (title) => {
-    setQuerying(false)
+    console.log(isQuerying);
     setQuery(title)
+    setQuerying(false)
   }
 
   const onDetailNavigate = (item) => {

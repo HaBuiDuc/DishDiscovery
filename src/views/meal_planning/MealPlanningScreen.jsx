@@ -4,11 +4,15 @@ import React from 'react'
 const MealPlanningScreen = () => {
   return (
     <View>
-      <Text>MealPlanningScreen</Text>
     </View>
   )
 }
 
 export default MealPlanningScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    margin: 16
+  }
+})

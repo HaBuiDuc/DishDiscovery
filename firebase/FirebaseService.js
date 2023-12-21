@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
 import { FIREBASE_AUTH, FIREBASE_FIRESTORE } from "./FirebaseConfig"
 import { Alert } from "react-native"
-import { addDoc, collection, getDoc, getDocs, onSnapshot, query, where } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, where } from "firebase/firestore"
 
 const auth = FIREBASE_AUTH
 
@@ -36,13 +36,13 @@ const firebaseSignOut = () => {
     auth.signOut()
 }
 
-const addUserToFirestore = async (userData) => {
+const addUserToFirestore = async (userData, callback) => {
     try {
         const docRef = await addDoc(collection(FIREBASE_FIRESTORE, "users"), userData)
             .then(() => {
                 console.log("Document successfully written!");
             })
-
+        callback()
         console.log("Document written with ID: ", docRef.id);
     } catch (e) {
         console.error("Error adding document: ", e);
@@ -56,7 +56,6 @@ const getUserFromFirestore = async (onGetInfoSuccess) => {
         querySnapshot.forEach((doc) => {
             console.log(doc.data());
             onGetInfoSuccess(doc.data())
-            // console.log(`${doc.id} => ${doc.data().fullName}`);
         });
     } catch (e) {
         console.error("Error retrieving user data: ", e);
@@ -85,40 +84,51 @@ const addFavoriteDish = async (dishId) => {
     }
 }
 
-// const getFavoriteDishes = async (onGetDishesSuccess) => {
-//     try {
-//         const q = query(collection(FIREBASE_FIRESTORE, "favorite_dishes"))
-//         const querySnapshot = await getDocs(q);
-//         querySnapshot.forEach((doc) => {
-//             console.log(doc.data());
-//             onGetDishesSuccess(doc.data())
-//             // console.log(`${doc.id} => ${doc.data().fullName}`);
-//         });
-//     } catch (e) {
-//         console.error("Error retrieving user data: ", e);
-//     }
-// }
+const removeFavoriteDish = async (dishId) => {
+    try {
+        const querySnapshot = await getDocs(query(collection(FIREBASE_FIRESTORE, "favorite_dishes"), where("id", "==", dishId)));
+        querySnapshot.forEach(async (doc) => {
+            await deleteDoc(doc.ref);
+        });
+    } catch (e) {
+        console.error("Error removing document: ", e);
+    }
+};
 
 const getFavoriteDishes = (onGetDishesSuccess, onListenDishesChange) => {
     try {
-      const q = query(collection(FIREBASE_FIRESTORE, "favorite_dishes"));
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const dishes = [];
-        querySnapshot.forEach((doc) => {
-          dishes.push({
-            id: doc.id,
-            ...doc.data(),
-          });
+        const q = query(collection(FIREBASE_FIRESTORE, "favorite_dishes"));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const dishes = [];
+            querySnapshot.forEach((doc) => {
+                dishes.push({
+                    id: doc.id,
+                    ...doc.data(),
+                });
+            });
+            onGetDishesSuccess(dishes);
         });
-        onGetDishesSuccess(dishes);
-      });
-  
-      // To listen to data changes
-    //   onListenDishesChange(unsubscribe);
+
+        // To listen to data changes
+        //   onListenDishesChange(unsubscribe);
     } catch (e) {
-      console.error("Error retrieving user data: ", e);
+        console.error("Error retrieving user data: ", e);
     }
-  };
+};
+
+const checkDishExistsInFirestore = (dishId, callback) => {
+    try {
+        const q = query(collection(FIREBASE_FIRESTORE, "favorite_dishes"), where("id", "==", dishId));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            callback(!querySnapshot.empty);
+        });
+        // Return the unsubscribe function if needed
+        return unsubscribe;
+    } catch (e) {
+        console.error("Error checking user existence: ", e);
+        return () => {}; // Return an empty function if an error occurs
+    }
+};
 
 export {
     firebaseSignIn,
@@ -128,5 +138,7 @@ export {
     getUserFromFirestore,
     checkUserExistsInFirestore,
     addFavoriteDish,
-    getFavoriteDishes
+    getFavoriteDishes,
+    checkDishExistsInFirestore,
+    removeFavoriteDish
 }

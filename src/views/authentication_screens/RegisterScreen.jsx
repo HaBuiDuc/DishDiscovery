@@ -1,13 +1,11 @@
-import { Alert, KeyboardAvoidingView, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { KeyboardAvoidingView, SafeAreaView, Text, TouchableOpacity, View } from "react-native"
 import { styles } from "./authentic.style"
-import { AuthInputField } from "../../components/authentication/AuthInputField"
 import { CustomButton } from "../../components/authentication/CustomButton"
 import { useState } from "react"
 import AuthTextInput from "../../components/authentication/AuthTextInput"
 import Spacer from "../../components/shared/Spacer"
 import Feather from 'react-native-vector-icons/Feather'
 import { FIREBASE_AUTH } from "../../../firebase/FirebaseConfig"
-import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth"
 import { firebaseSignUp } from "../../../firebase/FirebaseService"
 
 export const RegisterScreen = ({ navigation }) => {
@@ -17,18 +15,6 @@ export const RegisterScreen = ({ navigation }) => {
     const [isPasswordVis, setPasswordVis] = useState(true)
     const [isLoading, setLoading] = useState(false)
     const auth = FIREBASE_AUTH
-
-    // const emailVerification = (user) => {
-    //     sendEmailVerification(user)
-    //         .then(() => {
-    //             // Email verification sent
-    //             console.log("Email verification sent");
-    //         })
-    //         .catch((error) => {
-    //             // Handle error
-    //             console.error("Error sending email verification", error);
-    //         });
-    // }
 
     const signUp = () => {
         firebaseSignUp(email, password, setLoading)

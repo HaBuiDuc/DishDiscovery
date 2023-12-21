@@ -6,7 +6,6 @@ import AuthTextInput from "../../components/authentication/AuthTextInput"
 import Feather from 'react-native-vector-icons/Feather'
 import Spacer from "../../components/shared/Spacer"
 import { FIREBASE_AUTH } from "../../../firebase/FirebaseConfig"
-import { signInWithEmailAndPassword } from "firebase/auth"
 import { firebaseSignIn } from "../../../firebase/FirebaseService"
 
 export const LoginScreen = ({ navigation }) => {

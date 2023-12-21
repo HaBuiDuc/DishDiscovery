@@ -9,6 +9,7 @@ import { CustomButton } from '../../components/authentication/CustomButton';
 import 'firebase/firestore';
 import { FIREBASE_AUTH } from '../../../firebase/FirebaseConfig';
 import { addUserToFirestore } from '../../../firebase/FirebaseService';
+import AppScreen from '../../navigation/AppScreen';
 
 const AddUserInfoScreen = ({ navigation }) => {
     const [fullName, setFullName] = useState('')
@@ -35,7 +36,7 @@ const AddUserInfoScreen = ({ navigation }) => {
             email: auth.currentUser.email
         };
 
-        addUserToFirestore(userData)
+        addUserToFirestore(userData, () => navigation.navigate(AppScreen.MainBottom))
     }
 
     return (

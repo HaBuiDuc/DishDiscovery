@@ -1,14 +1,15 @@
 import { View, StyleSheet } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import TopBar from '../../components/detail/topbar/TopBar'
 import FoodPhoto from '../../components/detail/food_photo/FoodPhoto'
 import FoodDetail from '../../components/detail/food_detail/FoodDetail'
 import Modal from 'react-native-modal';
 import fetchRecipe from '../../hook/fetchRecipe'
-import { addFavoriteDish } from '../../../firebase/FirebaseService'
+import { addFavoriteDish, checkDishExistsInFirestore, removeFavoriteDish } from '../../../firebase/FirebaseService'
 
 
 const DetailScreen = ({ route, navigation }) => {
+  const [isFavorite, setIsFavorite] = useState(false)
   const popBack = () => {
     navigation.pop()
   }
@@ -19,6 +20,22 @@ const DetailScreen = ({ route, navigation }) => {
     }
     addFavoriteDish(data)
   }
+  const removeFromFavorite = () => {
+    removeFavoriteDish(foodDataId)
+  }
+
+  const onBookmarkPress = () => {
+    if (isFavorite) {
+      removeFromFavorite()
+    } else {
+      addToFavorite()
+    }
+    // setIsFavorite(!isFavorite)
+  }
+
+  useEffect(() => {
+    checkDishExistsInFirestore(foodDataId, setIsFavorite)
+  },[])
 
   const {data: foodData, isLoading: foodLoading, refetch: foodRefetch} = fetchRecipe(foodDataId)
   if (!foodData.extendedIngredients) {
@@ -28,8 +45,9 @@ const DetailScreen = ({ route, navigation }) => {
     <View style={styles.container}>
       <View style={styles.topBar}>
         <TopBar
+          isFavorite={isFavorite}
           popBack={popBack}
-          addToFavorite={addToFavorite}
+          addToFavorite={onBookmarkPress}
         />
       </View>
       <FoodPhoto

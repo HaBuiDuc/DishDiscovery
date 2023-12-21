@@ -3,7 +3,7 @@ import React from 'react'
 import CircleButton from '../../common/circle_button/CircleButton';
 
 
-const TopBar = ({ popBack, addToFavorite }) => {
+const TopBar = ({ popBack, addToFavorite, isFavorite }) => {
   return (
     <View style={styles.container}>
       <CircleButton
@@ -11,6 +11,7 @@ const TopBar = ({ popBack, addToFavorite }) => {
         onPress={popBack}
       />
       <CircleButton
+      bgColor={isFavorite ? 'gold' : 'white'}
         buttonIcon={'bookmark'}
         onPress={addToFavorite}
       />

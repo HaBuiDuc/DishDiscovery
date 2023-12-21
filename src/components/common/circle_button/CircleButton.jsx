@@ -2,9 +2,9 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
 import Feather from 'react-native-vector-icons/Feather';
 
-const CircleButton = ({ buttonIcon, size=24, onPress }) => {
+const CircleButton = ({ buttonIcon, size=24, onPress, bgColor='white' }) => {
   return (
-    <TouchableOpacity style={styles.buttonContainer}
+    <TouchableOpacity style={[styles.buttonContainer, {backgroundColor: bgColor}]}
       onPress={onPress}
     >
         <Feather name={buttonIcon} size={24}/>

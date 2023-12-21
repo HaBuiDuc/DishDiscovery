@@ -7,18 +7,54 @@ import Recommendation from "../../components/homepage/recommendation/Recommendat
 import { categoriesData } from "../../data/CategoriesData"
 import Popular from "../../components/homepage/popular/Popular"
 import fetchRecommend from "../../hook/fetchRecommend"
-import { getUserFromFirestore } from "../../../firebase/FirebaseService"
+import { useContext } from "react"
+import { UserProfileContext } from "../../contexts/UserProfileContext"
+import AppScreen from "../../navigation/AppScreen"
 
-export const HomePage = ({navigation}) => {
-    const {data, isLoading, refetch} = fetchRecommend()
+export const HomePage = ({ navigation }) => {
+    const { data, isLoading, refetch } = fetchRecommend()
     const foodData = data.recipes
+    const {userProfile} = useContext(UserProfileContext)
+
+    const onCategorySelect = (item) => {
+        let category = ''
+        console.log(item);
+        switch(item.id) {
+            case 0: {
+                category = 'all'
+                break
+            }
+            case 1: {
+                category = 'breakfast'
+                break
+            }
+            case 2: {
+                category = 'main course'
+                break
+            }
+            case 3: {
+                category = 'soup'
+                break
+            }
+            case 4: {
+                category = 'dessert'
+                break
+            }
+            case 5: {
+                category = 'snack'
+                break
+            }
+        }
+        navigation.navigate(AppScreen.FoodByCategoryScreen, {category})
+    }
+
     return (
         <View style={styles.container}>
-            <ScrollView 
+            <ScrollView
                 showsVerticalScrollIndicator={false}
             >
                 <HomeHeader
-                    userName={'Anna'}
+                    userName={userProfile.fullName}
                     userAvatar={require('/Users/habuiduc/Development/MobileDev/ReactNative/DishDiscovery/assets/images/image.jpeg')}
                 />
                 <Spacer height={8} />
@@ -30,6 +66,7 @@ export const HomePage = ({navigation}) => {
                 <Spacer height={16} />
                 <Categories
                     data={categoriesData}
+                    onCategorySelect={onCategorySelect}
                 />
                 <Spacer height={32} />
                 <Recommendation
@@ -57,5 +94,5 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgb(247,247,247)',
         flex: 1,
         paddingHorizontal: 16,
-    }  
+    }
 })

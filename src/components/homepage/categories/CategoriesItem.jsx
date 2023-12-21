@@ -1,11 +1,11 @@
 import { Image, View, Text, TouchableOpacity, StyleSheet } from "react-native"
 import Spacer from "../../shared/Spacer"
 
-export const CategoriesItem = ({ data }) => {
+export const CategoriesItem = ({ data, onCategorySelect }) => {
     return (
         <TouchableOpacity
             style={styles.container}
-
+            onPress={() => {onCategorySelect(data)}}
         >
             <Image
                 style={styles.itemImg}

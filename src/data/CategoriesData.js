@@ -1,18 +1,23 @@
 export const categoriesData = [
     {
+        id: 0,
+        itemName: 'All',
+        itemImg: require('../../assets/images/all_icon.png')
+    },
+    {
         id: 1,
         itemName: 'Breakfast',
         itemImg: require('../../assets/images/breakfast_icon.png')
     },
     {
         id: 2,
-        itemName: 'Lunch',
+        itemName: 'Main dish',
         itemImg: require('../../assets/images/lunch_icon.png')
     },
     {
         id: 3,
-        itemName: 'Dinner',
-        itemImg: require('../../assets/images/dinner_icon.png')
+        itemName: 'Soup',
+        itemImg: require('../../assets/images/soup_icon.png')
     },
     {
         id: 4,

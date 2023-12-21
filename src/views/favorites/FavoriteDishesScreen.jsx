@@ -2,12 +2,18 @@ import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getFavoriteDishes } from '../../../firebase/FirebaseService'
 import FavoriteItem from '../../components/favorites/FavoriteItem'
+import Spacer from '../../components/shared/Spacer'
+import AppScreen from '../../navigation/AppScreen'
 
-const FavoriteDishesScreen = () => {
+const FavoriteDishesScreen = ({navigation}) => {
   const [favoriteDishes, setFavoriteDishes] = useState([])
   const onGetDishSuccess = (dishes) => {
     console.log(dishes);
     setFavoriteDishes(dishes)
+  }
+  const onDishSelected = (item) => {
+    console.log(item);
+    navigation.navigate(AppScreen.DetailScreen, item)
   }
   useEffect(() => {
     getFavoriteDishes(onGetDishSuccess)
@@ -18,10 +24,13 @@ const FavoriteDishesScreen = () => {
         data={favoriteDishes}
         renderItem={({ item }) => (
           <FavoriteItem
+            onDishSelected={onDishSelected}
             foodId={item.id}
           />
         )}
         keyExtractor={item => item.id}
+        ItemSeparatorComponent={() => (<Spacer height={8} />)}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   )
