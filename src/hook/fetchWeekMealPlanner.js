@@ -3,11 +3,14 @@ import { apiKey } from "../utils/ApiKey"
 const { useEffect, useState } = require("react")
 
 const fetchWeekMealPlanner = (userHash) => {
+    console.log(userHash);
     const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null)
-    const currentDate = new Date().toLocaleDateString('en-CA');
-    const url = `https://api.spoonacular.com/mealplanner/dsky/week/${currentDate}?apiKey=${apiKey}&hash=${userHash}`
+    const currentDate = new Date().toISOString().split('T')[0]; // Get current date in yyyy-mm-dd format
+
+    const url = `https://api.spoonacular.com/mealplanner/generate?apiKey=${apiKey}&timeFrame=week&targetDate=${currentDate}&hash=${userHash}`;
+    console.log(url);
     const fetchData = async () => {
         try {
             setIsLoading(true)

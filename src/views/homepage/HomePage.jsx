@@ -10,6 +10,8 @@ import fetchRecommend from "../../hook/fetchRecommend"
 import { useContext } from "react"
 import { UserProfileContext } from "../../contexts/UserProfileContext"
 import AppScreen from "../../navigation/AppScreen"
+import fetchWeekMealPlanner from "../../hook/fetchWeekMealPlanner"
+import { SpoonacularInfoContext } from "../../contexts/SpoonacularInfoContext"
 
 export const HomePage = ({ navigation }) => {
     const { data, isLoading, refetch } = fetchRecommend()
