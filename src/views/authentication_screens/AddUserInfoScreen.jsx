@@ -14,7 +14,7 @@ import AppScreen from '../../navigation/AppScreen';
 const AddUserInfoScreen = ({ navigation }) => {
     const [fullName, setFullName] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
-    const [gender, setGender] = useState('')
+    const [gender, setGender] = useState(true)
     const [date, setDate] = useState(new Date())
     const [datePickerOpen, setDatePickerOpen] = useState(false)
     const formattedDate = date.toLocaleDateString('en-GB')

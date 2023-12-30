@@ -7,6 +7,7 @@ import Spacer from "../../components/shared/Spacer"
 import Feather from 'react-native-vector-icons/Feather'
 import { FIREBASE_AUTH } from "../../../firebase/FirebaseConfig"
 import { firebaseSignUp } from "../../../firebase/FirebaseService"
+import AppScreen from "../../navigation/AppScreen"
 
 export const RegisterScreen = ({ navigation }) => {
     const [username, setUsername] = useState('')
@@ -17,7 +18,7 @@ export const RegisterScreen = ({ navigation }) => {
     const auth = FIREBASE_AUTH
 
     const signUp = () => {
-        firebaseSignUp(email, password, setLoading)
+        firebaseSignUp(email, password, setLoading, () => {navigation.navigate('Login')})
     }
 
     const onHiddedPw = () => {

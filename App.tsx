@@ -44,6 +44,7 @@ function App(): JSX.Element {
   useEffect(() => {
     onAuthStateChanged(FIREBASE_AUTH, async (user) => {
       if (user?.emailVerified) {
+        console.log('called');
         setUser(user)
         setUserExists(await checkUserExistsInFirestore())
         getUserFromFirestore(onGetUserSuccess)

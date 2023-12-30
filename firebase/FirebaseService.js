@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword } from "firebase/auth"
 import { FIREBASE_AUTH, FIREBASE_FIRESTORE } from "./FirebaseConfig"
 import { Alert } from "react-native"
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, where } from "firebase/firestore"
@@ -18,12 +18,15 @@ const firebaseSignIn = async (email, password, setLoading) => {
     }
 }
 
-const firebaseSignUp = async (email, password, setLoading) => {
+const firebaseSignUp = async (email, password, setLoading, callback) => {
     console.log('sign up')
     setLoading(true)
     try {
         await createUserWithEmailAndPassword(auth, email, password)
         Alert.alert('Success', 'Account created successfully')
+        callback()
+        sendEmailVerification(auth.currentUser)
+        firebaseSignOut()
     } catch (error) {
         console.log(error);
         Alert.alert('Error', error.message)
@@ -43,7 +46,6 @@ const addUserToFirestore = async (userData, callback) => {
                 console.log("Document successfully written!");
             })
         callback()
-        console.log("Document written with ID: ", docRef.id);
     } catch (e) {
         console.error("Error adding document: ", e);
     }
