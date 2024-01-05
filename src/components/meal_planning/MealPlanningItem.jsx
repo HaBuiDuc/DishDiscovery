@@ -1,7 +1,7 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import fetchRecipe from '../../hook/fetchRecipe'
-import Spacer from '../shared/Spacer'
+import Spacer from '../common/spacer/Spacer';
 
 const MealPlanningItem = ({foodId, onItemPressed}) => {
     console.log(foodId);

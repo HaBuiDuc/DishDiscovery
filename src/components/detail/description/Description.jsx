@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, useWindowDimensions } from 'react-native'
 import React, { useState } from 'react'
-import Spacer from '../../shared/Spacer'
 import RenderHTML from 'react-native-render-html'
+import Spacer from '../../common/spacer/Spacer'
 
 
 const Description = ({ foodDes }) => {

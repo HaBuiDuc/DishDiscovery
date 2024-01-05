@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import Feather from 'react-native-vector-icons/Feather';
-import Spacer from '../../shared/Spacer';
 
 const StatisticItem = ({
   iconName,

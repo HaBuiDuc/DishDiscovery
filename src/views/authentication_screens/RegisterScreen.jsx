@@ -3,11 +3,11 @@ import { styles } from "./authentic.style"
 import { CustomButton } from "../../components/authentication/CustomButton"
 import { useState } from "react"
 import AuthTextInput from "../../components/authentication/AuthTextInput"
-import Spacer from "../../components/shared/Spacer"
 import Feather from 'react-native-vector-icons/Feather'
 import { FIREBASE_AUTH } from "../../../firebase/FirebaseConfig"
 import { firebaseSignUp } from "../../../firebase/FirebaseService"
 import AppScreen from "../../navigation/AppScreen"
+import Spacer from "../../components/common/spacer/Spacer"
 
 export const RegisterScreen = ({ navigation }) => {
     const [username, setUsername] = useState('')
