@@ -1,5 +1,5 @@
 import { Image, View, Text, TouchableOpacity, StyleSheet } from "react-native"
-import Spacer from "../../shared/Spacer"
+import Spacer from "../../common/spacer/Spacer"
 
 export const CategoriesItem = ({ data, onCategorySelect }) => {
     return (

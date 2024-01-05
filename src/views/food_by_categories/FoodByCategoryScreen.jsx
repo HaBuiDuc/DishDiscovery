@@ -2,9 +2,9 @@ import { FlatList, Image, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import fetchByCategory from '../../hook/fetchByCategory'
 import FoodByCategoryItem from '../../components/food_by_categories/FoodByCategoryItem'
-import Spacer from '../../components/shared/Spacer'
 import AppScreen from '../../navigation/AppScreen'
 import CustomHeader from '../../components/common/custom_header/CustomHeader'
+import Spacer from '../../components/common/spacer/Spacer'
 
 const FoodByCategoryScreen = ({route, navigation}) => {
     const {category} = route.params

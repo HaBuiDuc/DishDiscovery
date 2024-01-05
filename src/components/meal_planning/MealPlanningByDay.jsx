@@ -1,7 +1,7 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import MealPlanningItem from './MealPlanningItem'
-import Spacer from '../shared/Spacer'
+import Spacer from '../common/spacer/Spacer'
 
 const MealPlanningByDay = ({ day, mealData, onItemPressed }) => {
     return (

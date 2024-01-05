@@ -4,9 +4,9 @@ import { CustomButton } from "../../components/authentication/CustomButton"
 import { styles } from "./authentic.style"
 import AuthTextInput from "../../components/authentication/AuthTextInput"
 import Feather from 'react-native-vector-icons/Feather'
-import Spacer from "../../components/shared/Spacer"
 import { FIREBASE_AUTH } from "../../../firebase/FirebaseConfig"
 import { firebaseSignIn } from "../../../firebase/FirebaseService"
+import Spacer from "../../components/common/spacer/Spacer"
 
 export const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('')
@@ -61,6 +61,7 @@ export const LoginScreen = ({ navigation }) => {
             />
             <TouchableOpacity
                 style={styles.forgotPwContainer}
+                onPress={() => navigation.navigate('ForgotPassword')}
             >
                 <Text style={styles.clickableTxt}>Forgot password</Text>
             </TouchableOpacity>

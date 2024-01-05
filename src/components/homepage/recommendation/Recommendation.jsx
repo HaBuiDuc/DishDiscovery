@@ -1,8 +1,8 @@
 import { View, Text, FlatList, StyleSheet } from 'react-native'
 import React from 'react'
 import RecommendItem from './RecommendItem'
-import Spacer from '../../shared/Spacer'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import Spacer from '../../common/spacer/Spacer'
 
 const Recommendation = ({ foodData, onDetailToggle }) => {
   return (

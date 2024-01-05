@@ -1,5 +1,4 @@
 import UserProfileScreen from "../views/account/UserProfileScreen"
-import UserInfo from "../views/account/UserProfileScreen"
 import FavoriteDishesScreen from "../views/favorites/FavoriteDishesScreen"
 import { HomePage } from "../views/homepage/HomePage"
 import MealPlanningScreen from "../views/meal_planning/MealPlanningScreen"
@@ -70,7 +69,6 @@ function MainBottom() {
             options={{
                 title: 'User'
             }}
-
         />
     </Tab.Navigator>
 }

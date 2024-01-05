@@ -2,7 +2,6 @@ import { ScrollView, View, StyleSheet } from "react-native"
 import { HomeHeader } from "../../components/homepage/header/HomeHeader"
 import SearchView from "../../components/homepage/searchbar/SearchView"
 import Categories from "../../components/homepage/categories/Categories"
-import Spacer from "../../components/shared/Spacer"
 import Recommendation from "../../components/homepage/recommendation/Recommendation"
 import { categoriesData } from "../../data/CategoriesData"
 import Popular from "../../components/homepage/popular/Popular"
@@ -12,6 +11,7 @@ import { UserProfileContext } from "../../contexts/UserProfileContext"
 import AppScreen from "../../navigation/AppScreen"
 import fetchWeekMealPlanner from "../../hook/fetchWeekMealPlanner"
 import { SpoonacularInfoContext } from "../../contexts/SpoonacularInfoContext"
+import Spacer from "../../components/common/spacer/Spacer"
 
 export const HomePage = ({ navigation }) => {
     const { data, isLoading, refetch } = fetchRecommend()

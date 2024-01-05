@@ -2,10 +2,10 @@ import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getFavoriteDishes } from '../../../firebase/FirebaseService'
 import FavoriteItem from '../../components/favorites/FavoriteItem'
-import Spacer from '../../components/shared/Spacer'
 import AppScreen from '../../navigation/AppScreen'
+import Spacer from '../../components/common/spacer/Spacer'
 
-const FavoriteDishesScreen = ({navigation}) => {
+const FavoriteDishesScreen = ({ navigation }) => {
   const [favoriteDishes, setFavoriteDishes] = useState([])
   const onGetDishSuccess = (dishes) => {
     console.log(dishes);
@@ -15,6 +15,13 @@ const FavoriteDishesScreen = ({navigation}) => {
     console.log(item);
     navigation.navigate(AppScreen.DetailScreen, item)
   }
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      tabBarBadge: favoriteDishes.length, // Set badge count for the tab
+    })
+  }, [navigation, favoriteDishes])
+
   useEffect(() => {
     getFavoriteDishes(onGetDishSuccess)
   }, [])

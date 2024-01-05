@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 import { parseImgUrl } from '../../../utils/ParseImgUrl'
-import Spacer from '../../shared/Spacer'
 import { capitalizeFirstLetter } from '../../../utils/ExtendFunc'
+import Spacer from '../../common/spacer/Spacer'
 
 const IngredientItem = ({ ingredientData }) => {
     return (

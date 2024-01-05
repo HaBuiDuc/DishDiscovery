@@ -6,7 +6,8 @@ export const styles = StyleSheet.create({
         paddingVertical: 12,
         alignItems: "center",
         borderRadius: 8,
-        marginVertical: 24
+        marginVertical: 24,
+        width: '100%'
     },
     buttonTxt: {
         fontSize: 18,

@@ -1,6 +1,6 @@
 import { Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
-import Spacer from '../../shared/Spacer'
+import Spacer from '../../common/spacer/Spacer'
 
 const RecommendItem = ({data, onItemPressed}) => {
   return (

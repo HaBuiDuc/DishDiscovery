@@ -3,15 +3,15 @@ import React, { useState } from 'react'
 import AuthTextInput from '../../components/authentication/AuthTextInput'
 import Feather from 'react-native-vector-icons/Feather'
 import DropDownPicker from 'react-native-dropdown-picker';
-import Spacer from '../../components/shared/Spacer';
 import DatePicker from 'react-native-date-picker'
 import { CustomButton } from '../../components/authentication/CustomButton';
 import 'firebase/firestore';
 import { FIREBASE_AUTH } from '../../../firebase/FirebaseConfig';
 import { addUserToFirestore } from '../../../firebase/FirebaseService';
 import AppScreen from '../../navigation/AppScreen';
+import Spacer from '../../components/common/spacer/Spacer';
 
-const AddUserInfoScreen = ({ navigation }) => {
+const AddUserInfoScreen = ({ route, navigation }) => {
     const [fullName, setFullName] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
     const [gender, setGender] = useState(true)
@@ -19,6 +19,8 @@ const AddUserInfoScreen = ({ navigation }) => {
     const [datePickerOpen, setDatePickerOpen] = useState(false)
     const formattedDate = date.toLocaleDateString('en-GB')
     const auth = FIREBASE_AUTH
+    const {setUserExists} = route.params
+    console.log(typeof(setUserExists));
 
     const [genderSelectOpen, setGenderSelectOpen] = useState(false);
     const [items, setItems] = useState([
@@ -36,7 +38,7 @@ const AddUserInfoScreen = ({ navigation }) => {
             email: auth.currentUser.email
         };
 
-        addUserToFirestore(userData, () => navigation.navigate(AppScreen.MainBottom))
+        addUserToFirestore(userData, () => {setUserExists(true)})
     }
 
     return (

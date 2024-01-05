@@ -1,7 +1,7 @@
 import { View, Text, FlatList, StyleSheet } from 'react-native'
 import React from 'react'
 import { CategoriesItem } from './CategoriesItem'
-import Spacer from '../../shared/Spacer'
+import Spacer from '../../common/spacer/Spacer'
 
 const Categories = ({ data, onCategorySelect }) => {
     return (
